@@ -2,11 +2,17 @@
 # those songs should have an artist and a genre
 
 class Song
-  def initialize(name, genre, artist)
+  attr_accessor :name, :genre, :artist_name
+
+  def initialize(name, genre, artist_name)
     @name = name
     @genre = genre
     # reference to the artist
-    @artist = artist
+    @artist_name = artist_name
+  end
+
+  def self.all
+    ObjectSpace.each_object(self).to_a
   end
 end
 
@@ -49,13 +55,40 @@ class Genre
   end
 end
 
-songs = ["shake dat ass", "luke da best"]
 
-artist1 = Artist.new("luke", songs)
-puts artist1.inspect
-puts artist1.name # getter
-artist1.name=("abc") # setter
-new_songs = ["gbbg", "da "]
-puts artist1.songs=(new_songs)
-puts artist1.inspect
-# puts artist1.methods
+puts "BEFORE: #{Song.all}"
+
+# songs = ["shake dat ass", "luke da best"]
+song1 = Song.new("merry xmas", "dark", "tupac")
+song2 = Song.new("happy bday", "trance", "beethoven")
+# songs = [song1, song2]
+songs = Song.all
+
+puts "AFTER: #{Song.all}"
+
+
+def generate_artists(songs)
+  artist1 = Artist.new("luke", songs)
+  # puts artist1.inspect
+  # puts artist1.name # getter
+  input = gets.chomp
+  i = 0
+  songs.each do |song|
+    # puts "#{song.inspect} has index in array of #{index}"
+    if input == song.name
+      puts song.genre
+      # puts song.genre=("blahblah")
+    end
+  end
+  # # modifications to the artist
+  # artist1.name=("abc") # setter
+  # new_songs = ["gbbg", "da "]
+  # puts artist1.songs=(new_songs)
+
+  puts artist1.inspect
+  # puts artist1.methods
+  artist1.name
+end
+
+output = generate_artists(songs)
+puts output
