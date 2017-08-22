@@ -71,7 +71,8 @@ def generate_artists(songs)
   artist1 = Artist.new("luke", songs)
   # puts artist1.inspect
   # puts artist1.name # getter
-  input = gets.chomp
+  puts "PLEASE ENTER SONG NAME YOU'D LIKE TO SEE THE GENRE OF: "
+  input = gets.chomp.downcase
   i = 0
   songs.each do |song|
     # puts "#{song.inspect} has index in array of #{index}"
